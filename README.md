@@ -22,3 +22,13 @@ bikshare_starter.py
 
 * forked from udacity/pdsnd_github
 * bikeshare_starter.py supplied by Udacity
+
+## Common Usage Information
+
+* Run `bikeshare_starter.py` file in terminal (you must have Python installed)
+* Following the instructions from the application
+  * Select filters (filters are not **_case sensitive_**)
+    * City (depends what data files are available)
+    * Month (all, january, february, march, april, may, june)
+    * Day (all, monday, tuesday, wednesday, thursday, friday, saturday, sunday)
+  * Press `Enter` and watch the output in the terminal
