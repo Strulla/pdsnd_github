@@ -50,3 +50,5 @@ bikshare_starter.py
   * counts of user types
   * counts of gender
   * earliest, most recent, and most common year of birth
+* Display Raw Data function
+  * user can view 5 rows of raw data on demand

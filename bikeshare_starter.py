@@ -117,6 +117,9 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+# display raw data function (display_raw_data(df))
+# displays 5 lines of continues raw data upon user request until the user says NO
+# tip: use df.iloc 
 
 def main():
     while True:
