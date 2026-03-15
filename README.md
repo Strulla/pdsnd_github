@@ -32,3 +32,21 @@ bikshare_starter.py
     * Month (all, january, february, march, april, may, june)
     * Day (all, monday, tuesday, wednesday, thursday, friday, saturday, sunday)
   * Press `Enter` and watch the output in the terminal
+
+### Returned Statistics
+
+* Time Statistics
+  * most common month
+  * most common day of week
+  * most common start hour
+* Station Statistics
+  * most commonly used start station
+  * most commonly used end station
+  * most frequent combination of start station and end station trip
+* Trip duration statistics
+  * total travel time
+  * mean travel time
+* User statitics
+  * counts of user types
+  * counts of gender
+  * earliest, most recent, and most common year of birth
