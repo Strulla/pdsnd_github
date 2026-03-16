@@ -17,13 +17,21 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-
+    city = input("Please enter city you want to analyze (chicago, new york city, washington): ").lower()
+    while city not in CITY_DATA:
+        city = input("Invalid City. Please enter city (chicago, new york city, washington): ").lower()
 
     # get user input for month (all, january, february, ... , june)
-
+    month = input("Please enter month to analyze (all, january, february, march, april, may, june): ").lower()
+    MONTH_DATA = ['all', 'january', 'february', 'march', 'april', 'may', 'june']
+    while month not in MONTH_DATA:
+        month = input("Invalid Month. Please enter month (all, january, february, march, april, may, june): ").lower()
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
-
+    day = input("Please enter day to analyze (all, monday, tuesday, wednesday, thursday, friday, saturday, sunday) : ").lower()
+    DAY_DATA = ['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+    while day not in DAY_DATA:
+        day = input("Invalid day. Please enter day (all, monday, tuesday, wednesday, thursday, friday, saturday, sunday) : ").lower()
 
     print('-'*40)
     return city, month, day
@@ -40,7 +48,24 @@ def load_data(city, month, day):
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
+    df = pd.read_csv(CITY_DATA[city])   
+    
+    df['Start Time'] = pd.to_datetime(df['Start Time'])
+    df['End Time'] = pd.to_datetime(df['End Time'])
+    
+    df['month'] = df['Start Time'].dt.month
+    df['day_of_week'] = df['Start Time'].dt.weekday_name
+    
+    df['hour'] = df['Start Time'].dt.hour
+    
+    if month != 'all':
+        months = ['january', 'february', 'march', 'april', 'may', 'june']
+        month = months.index(month) + 1        
+    
+        df = df[df['month'] == month]
 
+    if day != 'all':
+        df = df[df['day_of_week'] == day.title()]
 
     return df
 
@@ -116,6 +141,24 @@ def user_stats(df):
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
+    
+    
+def display_raw_data(df):
+    """Displays 5 lines of continues raw data upon user request."""
+    
+    print(len(df))
+    start_index = 0
+    while True:
+        show_raw_data = input("Do you want to view the next 5 lines of raw data (yes, no)?").lower()
+        if show_raw_data != 'yes':
+            break
+        end_index = start_index + 2000    
+        
+        if start_index >= len(df):
+            print("No more data to display.")
+            break
+        print(df.iloc[start_index:end_index])
+        start_index = end_index
 
 # display raw data function (display_raw_data(df))
 # displays 5 lines of continues raw data upon user request until the user says NO
@@ -130,6 +173,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
+        display_raw_data(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
